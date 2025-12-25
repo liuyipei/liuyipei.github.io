@@ -1,2 +1,1 @@
-# liuyipei.github.io
-Yi Liu's Blog
+Yi Liu's Blog (hosted on github)
