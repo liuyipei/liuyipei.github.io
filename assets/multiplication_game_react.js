@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'https://esm.sh/react@18.3.1';
-import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client';
-import { CheckCircle, Lightbulb, XCircle } from 'https://esm.sh/lucide-react@0.468.0';
+import React, { useEffect, useState } from 'https://esm.sh/react@latest';
+import { createRoot } from 'https://esm.sh/react-dom@latest/client';
+import { CheckCircle, Lightbulb, XCircle } from 'https://esm.sh/lucide-react@latest';
 
 function MultiplicationGame() {
   const [currentQuestion, setCurrentQuestion] = useState({ a: 2, b: 3 });
