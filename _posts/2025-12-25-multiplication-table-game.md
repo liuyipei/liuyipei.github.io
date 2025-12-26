@@ -9,4 +9,4 @@ title: "Multiplication Table Lookup Game"
 <script src="https://cdn.tailwindcss.com"></script>
 <script type="module" src="{{ '/assets/multiplication_game_react.js' | relative_url }}"></script>
 
-Experience the multiplication table lookup game, built with React and rendered directly on this page.
+Remember: when changing the React source, rebuild the bundled JS locally and commit the updated compiled file to keep this page working.

@@ -130,7 +130,7 @@ function MultiplicationGame() {
         <div className="bg-yellow-100 border-4 border-yellow-400 rounded-xl p-4 mb-4">
           <div className="flex flex-col gap-4 md:flex-row md:items-center min-h-[152px]">
             <div className="md:w-5/12 lg:w-4/12 flex justify-center md:justify-start">
-              <div className="w-full max-w-sm">
+              <div className="w-full max-w-sm min-h-[140px]">
                 {feedback === 'correct' && (
                   <div className="flex flex-col gap-1 text-green-700 bg-white/50 rounded-lg p-3 shadow-inner">
                     <div className="flex items-center text-xl font-bold">
