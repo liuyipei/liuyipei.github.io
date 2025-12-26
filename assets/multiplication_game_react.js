@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { CheckCircle, XCircle, Lightbulb } from 'lucide-react';
+import React, { useEffect, useState } from 'https://esm.sh/react@18.3.1';
+import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client';
+import { CheckCircle, Lightbulb, XCircle } from 'https://esm.sh/lucide-react@0.468.0';
 
-export default function MultiplicationGame() {
+function MultiplicationGame() {
   const [currentQuestion, setCurrentQuestion] = useState({ a: 2, b: 3 });
   const [score, setScore] = useState(0);
   const [attempts, setAttempts] = useState(0);
@@ -21,21 +22,19 @@ export default function MultiplicationGame() {
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
-    
+
     oscillator.connect(gainNode);
     gainNode.connect(audioContext.destination);
-    
+
     if (isCorrect) {
-      // Happy ascending notes
-      oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
-      oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1); // E5
-      oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2); // G5
+      oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime);
+      oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1);
+      oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2);
       gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
       gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
       oscillator.start(audioContext.currentTime);
       oscillator.stop(audioContext.currentTime + 0.4);
     } else {
-      // Lower "try again" tone
       oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
       gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
       gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
@@ -46,11 +45,11 @@ export default function MultiplicationGame() {
 
   const handleAnswer = (number) => {
     const correct = currentQuestion.a * currentQuestion.b;
-    setAttempts(attempts + 1);
+    setAttempts((prev) => prev + 1);
     setLastAnswer(number);
-    
+
     if (number === correct) {
-      setScore(score + 1);
+      setScore((prev) => prev + 1);
       setFeedback('correct');
       playSound(true);
       setTimeout(() => generateQuestion(), 2000);
@@ -69,17 +68,17 @@ export default function MultiplicationGame() {
   const getNumberColor = (num) => {
     const ones = num % 10 === 0 ? 10 : num % 10;
     const tens = Math.floor((num - 1) / 10);
-    
+
     const onesColors = ['bg-red-200', 'bg-orange-200', 'bg-yellow-200', 'bg-green-200', 'bg-teal-200',
                         'bg-blue-200', 'bg-indigo-200', 'bg-purple-200', 'bg-pink-200', 'bg-rose-200'];
     const tensColors = ['border-4 border-red-500', 'border-4 border-orange-500', 'border-4 border-yellow-500',
                         'border-4 border-green-500', 'border-4 border-teal-500', 'border-4 border-blue-500',
                         'border-4 border-indigo-500', 'border-4 border-purple-500', 'border-4 border-pink-500',
                         'border-4 border-rose-500'];
-    
+
     const bgColor = onesColors[ones - 1];
     const borderColor = tensColors[tens];
-    
+
     return `${bgColor} ${borderColor}`;
   };
 
@@ -87,14 +86,14 @@ export default function MultiplicationGame() {
     const product = row * col;
     const ones = product % 10 === 0 ? 10 : product % 10;
     const tens = Math.floor((product - 1) / 10);
-    
+
     const onesColors = ['bg-red-100', 'bg-orange-100', 'bg-yellow-100', 'bg-green-100', 'bg-teal-100',
                         'bg-blue-100', 'bg-indigo-100', 'bg-purple-100', 'bg-pink-100', 'bg-rose-100'];
     const tensColors = ['border-l-4 border-red-400', 'border-l-4 border-orange-400', 'border-l-4 border-yellow-400',
                         'border-l-4 border-green-400', 'border-l-4 border-teal-400', 'border-l-4 border-blue-400',
                         'border-l-4 border-indigo-400', 'border-l-4 border-purple-400', 'border-l-4 border-pink-400',
                         'border-l-4 border-rose-400'];
-    
+
     return `${onesColors[ones - 1]} ${tensColors[tens]}`;
   };
 
@@ -116,7 +115,7 @@ export default function MultiplicationGame() {
         <h1 className="text-3xl font-bold text-center mb-2 text-purple-800">
           Multiplication Table Lookup Game
         </h1>
-        
+
         <div className="text-center mb-3">
           <div className="inline-block bg-white rounded-lg shadow px-4 py-2">
             <span className="text-xl font-bold text-green-600">Score: {score}</span>
@@ -237,4 +236,10 @@ export default function MultiplicationGame() {
       </div>
     </div>
   );
+}
+
+const container = document.getElementById('multiplication-game-root');
+if (container) {
+  const root = createRoot(container);
+  root.render(<MultiplicationGame />);
 }
