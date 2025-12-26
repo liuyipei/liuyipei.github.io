@@ -127,41 +127,53 @@ function MultiplicationGame() {
           </div>
         </div>
 
-        <div className="bg-yellow-100 border-4 border-yellow-400 rounded-xl p-3 mb-4 text-center">
-          <div className="flex items-center justify-center gap-4">
-            <h2 className="text-4xl font-bold text-gray-800">
-              What is {currentQuestion.a} × {currentQuestion.b}?
-            </h2>
-            <button
-              onMouseEnter={handleHintHover}
-              className="bg-yellow-400 hover:bg-yellow-500 text-yellow-900 rounded-full p-3 shadow-lg transition-all hover:scale-110"
-              title="Hover for hint"
-            >
-              <Lightbulb size={28} />
-            </button>
+        <div className="bg-yellow-100 border-4 border-yellow-400 rounded-xl p-4 mb-4">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center min-h-[152px]">
+            <div className="md:w-5/12 lg:w-4/12 flex justify-center md:justify-start">
+              <div className="w-full max-w-sm min-h-[140px]">
+                {feedback === 'correct' && (
+                  <div className="flex flex-col gap-1 text-green-700 bg-white/50 rounded-lg p-3 shadow-inner">
+                    <div className="flex items-center text-xl font-bold">
+                      <CheckCircle className="mr-2" size={28} />
+                      Great job! That's correct!
+                    </div>
+                    <div className="text-2xl font-bold text-green-800">
+                      {currentQuestion.a} × {currentQuestion.b} = {lastAnswer}
+                    </div>
+                  </div>
+                )}
+                {feedback === 'incorrect' && (
+                  <div className="flex flex-col gap-1 text-red-700 bg-white/50 rounded-lg p-3 shadow-inner">
+                    <div className="flex items-center text-xl font-bold">
+                      <XCircle className="mr-2" size={28} />
+                      Try again!
+                    </div>
+                    <div className="text-xl font-bold text-red-800">
+                      {currentQuestion.a} × {currentQuestion.b} ≠ {lastAnswer}
+                    </div>
+                  </div>
+                )}
+                {!feedback && (
+                  <div className="text-yellow-900 bg-white/40 rounded-lg p-3 font-semibold shadow-inner">
+                    Choose an answer to see feedback here. Your response status will stay in this space so nothing jumps around.
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="flex-1 flex items-center justify-center gap-4 text-center">
+              <h2 className="text-4xl font-bold text-gray-800">
+                What is {currentQuestion.a} × {currentQuestion.b}?
+              </h2>
+              <button
+                onMouseEnter={handleHintHover}
+                className="bg-yellow-400 hover:bg-yellow-500 text-yellow-900 rounded-full p-3 shadow-lg transition-all hover:scale-110"
+                title="Hover for hint"
+              >
+                <Lightbulb size={28} />
+              </button>
+            </div>
           </div>
-          {feedback === 'correct' && (
-            <div className="mt-2">
-              <div className="flex items-center justify-center text-green-600 text-xl font-bold">
-                <CheckCircle className="mr-2" size={28} />
-                Great job! That's correct!
-              </div>
-              <div className="text-2xl font-bold text-green-700 mt-1">
-                {currentQuestion.a} × {currentQuestion.b} = {lastAnswer}
-              </div>
-            </div>
-          )}
-          {feedback === 'incorrect' && (
-            <div className="mt-2">
-              <div className="flex items-center justify-center text-red-600 text-xl font-bold">
-                <XCircle className="mr-2" size={28} />
-                Try again!
-              </div>
-              <div className="text-xl font-bold text-red-700 mt-1">
-                {currentQuestion.a} × {currentQuestion.b} ≠ {lastAnswer}
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
